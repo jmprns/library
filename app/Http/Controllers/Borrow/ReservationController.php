@@ -38,6 +38,18 @@ class ReservationController extends Controller
 
     public function form($id)
     {
+        $checkR = Reservation::where('borrow_id', Auth::user()->id)
+                    ->where('status', 1)
+                    ->orWhere('status', 2)
+                    ->orWhere('status', 3)
+                    ->orWhere('status', 5)
+                    ->get()
+                    ->count();
+
+        if($checkR != 0){
+            return redirect()->back()->with('error', 'Cannot reserve this book.');
+        }
+
     	$book = Book::find($id);
 
     	if(!$book){

@@ -128,6 +128,10 @@ $(document).ready(function() {
   alert('{{ session('success') }}');
 @endif
 
+@if(session('error'))
+  alert('{{ session('error') }}');
+@endif
+
 
 </script>
 @endsection
